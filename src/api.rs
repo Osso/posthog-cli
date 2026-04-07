@@ -111,11 +111,9 @@ impl PostHogClient {
         // Try local_evaluation first — works with feature_flag:read scope
         let url = format!("{}/api/feature_flag/local_evaluation/", self.host);
         if let Some(data) = self.try_get::<LocalEvalResponse>(&url)? {
-            return data
-                .flags
-                .first()
-                .map(|f| f.team_id)
-                .context("No feature flags found to determine project ID. Set project_id in config.");
+            return data.flags.first().map(|f| f.team_id).context(
+                "No feature flags found to determine project ID. Set project_id in config.",
+            );
         }
 
         // Fall back to /api/projects/ (requires project:read scope)

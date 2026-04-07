@@ -79,7 +79,11 @@ fn flag_to_row(f: &FeatureFlag) -> FlagRow {
     FlagRow {
         key: f.key.clone(),
         name: f.name.clone(),
-        active: if f.active { "yes".to_string() } else { "no".to_string() },
+        active: if f.active {
+            "yes".to_string()
+        } else {
+            "no".to_string()
+        },
         created,
     }
 }
